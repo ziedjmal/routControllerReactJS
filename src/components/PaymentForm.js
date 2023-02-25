@@ -1,37 +1,100 @@
-import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import * as React from "react";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+
 export default function PaymentForm() {
-  const [age, setAge] = React.useState('');
+  const [typeOfCarPlateLicence, setTypeOfCarPlateLicence] = React.useState("");
+  const [tuValue, setTuValue] = React.useState("");
+  const [rsValue, setRsValue] = React.useState("");
+  const [motoValue, setMotoValue] = React.useState("");
+  // add more state variables for each option
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setTypeOfCarPlateLicence(event.target.value);
   };
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Licence Plate"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>تونس</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
+      <Grid
+        container
+        spacing={3}
+        style={{
+          display: "flex",
+        }}
+      >
+        <Grid item xs={12} >
+          <InputLabel id="demo-simple-select-label">
+            Car plate Licence
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={typeOfCarPlateLicence}
+            label="Licence Plate"
+            onChange={handleChange}
+          >
+            <MenuItem value={"TU"}>Série Normale (TU) تونس</MenuItem>
+            <MenuItem value={"RS"}>Régime Suspensif (RS) ن ت</MenuItem>
+            <MenuItem value={"MOTO"}>Moto (MOTO) د ن</MenuItem>
+            {/* add more menu items for each option */}
+          </Select>
+          </Grid>
+          <Grid item container spacing={2}>
+          {typeOfCarPlateLicence === "TU" && (
+            <Grid item container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  label="Serie"
+                  value={tuValue}
+                  onChange={(event) => setTuValue(event.target.value)}
+                  fullWidth
+                />
+              </Grid>
+
+              
+              <Grid item xs={6}>
+                <TextField
+                  label="N°"
+                  value={tuValue}
+                  onChange={(event) => setTuValue(event.target.value)}
+                  fullWidth
+                />
+              </Grid>
+            </Grid>
+          )}
+
+          {typeOfCarPlateLicence === "RS" && (
+            <Grid item xs={12} md={6}>
+              <TextField
+                label="RS value"
+                value={rsValue}
+                onChange={(event) => setRsValue(event.target.value)}
+                fullWidth
+              />
+            </Grid>
+          )}
+
+          {typeOfCarPlateLicence === "MOTO" && (
+            <Grid item >
+              <TextField
+                label="MOTO value"
+                value={motoValue}
+                onChange={(event) => setMotoValue(event.target.value)}
+                fullWidth
+              />
+            </Grid>
+          )}
+
+          {/* add more text fields for each option */}
         </Grid>
 
         <Grid item xs={12}>

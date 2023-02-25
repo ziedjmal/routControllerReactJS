@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-
+import Test from './Test';
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -38,7 +38,7 @@ function getStepContent(step) {
     case 1:
       return <PaymentForm />;
     case 2:
-      return <Review />;
+      return <Test />;
     default:
       throw new Error('Unknown step');
   }
