@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import InputAdornment from '@mui/material/InputAdornment';
 
 export default function PaymentForm() {
   const [typeOfCarPlateLicence, setTypeOfCarPlateLicence] = React.useState("");
@@ -18,6 +19,42 @@ export default function PaymentForm() {
   const handleChange = (event) => {
     setTypeOfCarPlateLicence(event.target.value);
   };
+
+  const [limitSpeed, setLimitSpeed] = React.useState("");
+  const handleLimitSpeed = (e) => {
+    const regEX = new RegExp("^[0-9]{0,3}$")
+    console.log(e.target.value);
+    if (regEX.test(e.target.value)) {
+      setLimitSpeed(e.target.value);
+    }
+  };
+
+  const [actualSpeed, setActualSpeed] = React.useState("");
+  const handleActualSpeed = (e) => {
+    const regEX = new RegExp("^[0-9]{0,3}$")
+    console.log(e.target.value);
+    if (regEX.test(e.target.value)) {
+      setActualSpeed(e.target.value);
+    }
+  };
+  const [serieTU, setSerieTU] = React.useState("");
+  const handleSerieTU = (e) => {
+    const regEX = new RegExp("^[0-9]{0,3}$")
+    console.log(e.target.value);
+    if (regEX.test(e.target.value)) {
+      setSerieTU(e.target.value);
+    }
+  };
+  const [numeroTU, setNumeroTU] = React.useState("");
+  const handleNumeroTU = (e) => {
+    const regEX = new RegExp("^[0-9]{0,4}$")
+    console.log(e.target.value);
+    if (regEX.test(e.target.value)) {
+      setNumeroTU(e.target.value);
+    }
+  };
+
+
 
   return (
     <React.Fragment>
@@ -31,6 +68,28 @@ export default function PaymentForm() {
           display: "flex",
         }}
       >
+            <Grid item xs={6}>
+                <TextField
+                  label="Limit Speed "
+                  value={limitSpeed}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="start">Km/H</InputAdornment>,
+                  }}
+                  onChange={handleLimitSpeed}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Actual Speed"
+                  value={actualSpeed}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="start">Km/H</InputAdornment>,
+                  }}
+                  onChange={handleActualSpeed}
+                  fullWidth
+                />
+              </Grid>
         <Grid item xs={12} >
           <InputLabel id="demo-simple-select-label">
             Car plate Licence
@@ -41,6 +100,7 @@ export default function PaymentForm() {
             value={typeOfCarPlateLicence}
             label="Licence Plate"
             onChange={handleChange}
+            fullWidth
           >
             <MenuItem value={"TU"}>Série Normale (TU) تونس</MenuItem>
             <MenuItem value={"RS"}>Régime Suspensif (RS) ن ت</MenuItem>
@@ -54,8 +114,8 @@ export default function PaymentForm() {
               <Grid item xs={6}>
                 <TextField
                   label="Serie"
-                  value={tuValue}
-                  onChange={(event) => setTuValue(event.target.value)}
+                  value={serieTU}
+                  onChange={handleSerieTU}
                   fullWidth
                 />
               </Grid>
@@ -64,8 +124,8 @@ export default function PaymentForm() {
               <Grid item xs={6}>
                 <TextField
                   label="N°"
-                  value={tuValue}
-                  onChange={(event) => setTuValue(event.target.value)}
+                  value={numeroTU}
+                  onChange={handleNumeroTU}
                   fullWidth
                 />
               </Grid>
@@ -73,7 +133,7 @@ export default function PaymentForm() {
           )}
 
           {typeOfCarPlateLicence === "RS" && (
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12}>
               <TextField
                 label="RS value"
                 value={rsValue}
@@ -84,7 +144,7 @@ export default function PaymentForm() {
           )}
 
           {typeOfCarPlateLicence === "MOTO" && (
-            <Grid item >
+            <Grid item xs={12} >
               <TextField
                 label="MOTO value"
                 value={motoValue}

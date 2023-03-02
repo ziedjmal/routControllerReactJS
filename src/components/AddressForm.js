@@ -16,7 +16,7 @@ export default function AddressForm() {
   };
   const [license, setLicense] = React.useState("");
   const handleLicense = (e) => {
-    const regEX = new RegExp("^[0-9]{0,3}TU[0-9]{0,4}$");
+    const regEX = new RegExp("^[0-9]{0,2}/*[0-9]{0,6}$");
     if (regEX.test(e.target.value)) {
       if (license.length == 1 && e.target.value.length == 2) {
         setLicense(e.target.value + "/");
@@ -26,7 +26,7 @@ export default function AddressForm() {
   };
   const [email, setEmail] = React.useState("");
   const handleEmail = (e) => {
-    const regEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regEX = {};
     console.log(e.target.value);   
     if (regEX.test(e.target.value)) {
       setEmail(e.target.value);
@@ -34,7 +34,7 @@ export default function AddressForm() {
   };
   const [phone, setPhone] = React.useState("");
   const handlePhone = (e) => {
-    const regEX = new RegExp("^(?:\\d{3})(?:TU)(?:\\d{3,4})$")
+    const regEX = new RegExp("^[0-9]{0,8}$")
     console.log(e.target.value);
     if (regEX.test(e.target.value)) {
       setPhone(e.target.value);

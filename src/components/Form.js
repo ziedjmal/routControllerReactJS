@@ -16,20 +16,6 @@ import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import Test from './Test';
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
 function getStepContent(step) {
   switch (step) {
@@ -44,10 +30,16 @@ function getStepContent(step) {
   }
 }
 
+const steps = ['Shipping address', 'Payment details', 'Review your order'];
+
 const theme = createTheme();
 
 export default function Checkout() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(parseInt(localStorage.getItem('activeStep')) || 0);
+
+  React.useEffect(() => {
+    localStorage.setItem('activeStep', activeStep);
+  }, [activeStep]);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -104,7 +96,6 @@ export default function Checkout() {
             </React.Fragment>
           )}
         </Paper>
-        <Copyright />
       </Container>
     </ThemeProvider>
   );
