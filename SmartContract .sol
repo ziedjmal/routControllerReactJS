@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 contract PFA {
     mapping(string => uint256) public registrations;
     address payable private owner;
-    address payable private agent;
+    address payable private sender;
 
 
     constructor() {
@@ -22,10 +22,13 @@ contract PFA {
         require(msg.value > 0, "No ether sent");
         require(msg.value >= registrations[key], "No enough ether "); //7ata na3erfou kifeh transfer mich ikoun mil lien  donc 5tarna inou ikoun == mich >=
         rest = msg.value - registrations[key];
-        owner.transfer(msg.value);
+        console.log( " | sent = ",msg.value," | pay = ",registrations[key]);
+        console.log("rest = ", rest );
+        owner.transfer(registrations[key]);
         registrations[key] = 0;
+        console.log("Sender of money :", msg.sender);
         require(rest > 0, "No excess balance to return.");
-        payable(msg.sender).transfer(rest);
+         payable(msg.sender).transfer(rest);
     }
 
     function getRegistrationValue(string memory key) public view returns (uint256)
