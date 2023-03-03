@@ -35,5 +35,8 @@ contract PFA {
     {
         return registrations[key];
     }
-
+    function close() public 
+        require(msg.sender == owner, "Only the owner can close this contract");
+        selfdestruct(owner);{//deprecaded
+    }
 }
